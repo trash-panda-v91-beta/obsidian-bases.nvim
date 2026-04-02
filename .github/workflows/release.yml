@@ -1,0 +1,21 @@
+---
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@a02a34c4d625f9be7cb89f4291f2343e4e95d32e # v4.2.1
+        with:
+          config-file: .release-please-config.json
+          manifest-file: .release-please-manifest.json
