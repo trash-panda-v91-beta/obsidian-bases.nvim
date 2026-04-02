@@ -11,7 +11,7 @@ jobs:
     name: Lint & Format
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: jdx/mise-action@v2
       - run: mise run check
 
@@ -19,6 +19,6 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: jdx/mise-action@v2
       - run: mise run test
