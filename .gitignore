@@ -1,0 +1,8 @@
+*.swp
+*.swo
+*~
+.DS_Store
+tags
+.luarc.json
+dev.log
+fnox.toml

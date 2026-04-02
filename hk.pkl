@@ -1,0 +1,35 @@
+amends "package://github.com/jdx/hk/releases/download/v1.36.0/hk@1.36.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.36.0/hk@1.36.0#/Builtins.pkl"
+
+fail_fast = false
+
+local linters = new Mapping<String, Step> {
+    // Security & Safety
+    ["check-merge-conflict"] = Builtins.check_merge_conflict
+
+    // Lua: stylua for formatting, selene for linting
+    ["stylua"] = Builtins.stylua
+    ["selene"] = new Step {
+        check = "selene lua/"
+        glob = "*.lua"
+    }
+}
+
+hooks {
+    ["check"] {
+        fix = false
+        steps = linters
+    }
+
+    ["fix"] {
+        fix = true
+        stash = "none"
+        steps = linters
+    }
+
+    ["pre-commit"] {
+        fix = true
+        stash = "git"
+        steps = linters
+    }
+}

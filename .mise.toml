@@ -1,0 +1,36 @@
+[tools]
+stylua = "2.0.2"
+"ubi:Kampfkarren/selene" = "0.30.1"
+hk = "1.36.0"
+pkl = "0.30.2"
+neovim = "0.11.6"
+
+[tasks.check]
+description = "Run all checks (lint + format)"
+run = "hk check"
+
+[tasks.fix]
+description = "Auto-fix (format + lint)"
+run = "hk fix"
+
+[tasks.lint]
+description = "Lint Lua files"
+run = "selene lua/"
+
+[tasks.fmt]
+description = "Format Lua files"
+run = "stylua lua/"
+
+[tasks."fmt:check"]
+description = "Check Lua formatting"
+run = "stylua --check lua/"
+
+[tasks.test]
+description = "Run tests"
+run = """
+#!/usr/bin/env bash
+set -e
+for f in tests/*_spec.lua; do
+  nvim --headless --noplugin -u NONE --cmd 'set rtp+=.' -l "$f"
+done
+"""
